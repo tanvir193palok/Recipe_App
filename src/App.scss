@@ -269,11 +269,19 @@ p {
     border-radius: 6px;
     overflow: hidden;
     width: calc(100% / 4 - 20px);
+    margin-bottom: 70px;
 
     .img-wrapper {
+      margin-bottom: 10px;
       img {
         width: 100%;
       }
+    }
+
+    p {
+      color: #29336b;
+      padding: 0 15px;
+      
     }
   }
 }
