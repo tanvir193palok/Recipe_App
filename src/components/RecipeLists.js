@@ -11,6 +11,14 @@ const RecipeLists = () => {
   const [query, setQuery] = useState("pizza");
   const [data, setData] = useState("");
 
+  //search recipe function
+  const searchRecipe = (searchQuery) => {
+    fetchData(searchedTerm).then((response) => {
+      setData(response);
+      console.log(response);
+    });
+  };
+
   useEffect(() => {
     fetchData(query).then((response) => {
       setData(response);
@@ -22,8 +30,13 @@ const RecipeLists = () => {
       <div className="heading-line">
         <strong>Search Recipes</strong>
         <div className="input-wrapper">
-          <input type="text" placeholder="Search Your Recipe" />
-          <button>
+          <input
+            onChange={(e) => setSearchedTerm(e.target.value)}
+            value={searchedTerm}
+            type="text"
+            placeholder="Search Your Recipe"
+          />
+          <button onClick={() => searchRecipe(searchedTerm)}>
             <BsSearch />
           </button>
         </div>
