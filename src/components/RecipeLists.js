@@ -6,25 +6,26 @@ import { fetchData } from "../service";
 //importing icons
 import { BsSearch } from "react-icons/bs";
 
-const RecipeLists = () => {
+const RecipeLists = (props) => {
   const [searchedTerm, setSearchedTerm] = useState("");
   const [query, setQuery] = useState("pizza");
   const [data, setData] = useState("");
 
   //search recipe function
   const searchRecipe = (searchQuery) => {
-    fetchData(searchedTerm).then((response) => {
+    fetchData(searchQuery).then((response) => {
       setData(response);
-      console.log(response);
+      props.setLoader(false);
     });
   };
 
   useEffect(() => {
     fetchData(query).then((response) => {
       setData(response);
-      console.log(response);
+      props.setLoader(false);
     });
   }, []);
+
   return (
     <div className="container">
       <div className="heading-line">
@@ -36,7 +37,9 @@ const RecipeLists = () => {
             type="text"
             placeholder="Search Your Recipe"
           />
-          <button onClick={() => searchRecipe(searchedTerm)}>
+          <button
+            onClick={() => (searchRecipe(searchedTerm), props.setLoader(true))}
+          >
             <BsSearch />
           </button>
         </div>
